@@ -12,7 +12,7 @@
 # Best, 
 # <br>George
 
-# In[2]:
+# In[1]:
 
 
 #importing what I need
@@ -21,7 +21,7 @@ from matplotlib import pyplot as plt
 import sqlite3 as sql
 
 
-# In[3]:
+# In[2]:
 
 
 #connecting
@@ -41,7 +41,7 @@ storeco.to_sql("storeco",conn,if_exists='replace',index=False)
 
 # George JJTA Hayward: First, I am going to get you a table that shows everything we need quickly. Second, I am going to give you a data visualization that summarizes the table. 
 
-# In[4]:
+# In[3]:
 
 
 #I will inject the SQL into Python below:
@@ -58,7 +58,7 @@ ORDER BY 1 ASC;
 """, conn)
 
 
-# In[10]:
+# In[4]:
 
 
 #I will now show viszualize the data. I prefer a stacked bar chart for this:
@@ -77,14 +77,15 @@ ORDER BY 1 ASC;
 f, ax = plt.subplots(figsize=(15, 10))
 
 returns = storeco_dv.Returned_Orders
+completed = storeco_dv.Completed_Orders
 total = storeco_dv.Total_Orders
 percent = storeco_dv.Return_Percentage
 
 p1 = plt.bar(range(len(returns)),
  returns, color = 'cornflowerblue')
 
-p2 = plt.bar(range(len(total)),
- total, bottom = returns, color = 'sandybrown')
+p2 = plt.bar(range(len(completed)),
+ completed, bottom = returns, color = 'sandybrown')
 
 ax.set_xticklabels(['0','August', 'September', 'October','November', 'December'], style='italic')
 plt.xlabel("Month", fontweight='bold', fontsize = 13)
@@ -92,11 +93,11 @@ plt.ylabel("Number of Orders", fontweight='bold', fontsize = 13)
 plt.legend((p1[0], p2[0]), ('Returned Orders', 'Completed Orders'))
 plt.title("StoreCo's Completed and Returned Orders, 2016", fontsize = 16, fontweight = 'bold')
 
-for a,b in zip(range(len(total)), total):
-   plt.text(a, b+22, str(b)+" total orders", horizontalalignment='center', color='green', fontweight='bold')
+for a,b in zip(range(len(total)), total): 
+   plt.text(a, b+5, str(b)+" total orders", horizontalalignment='center', color='green', fontweight='bold')
 
-for a,b in zip(range(len(percent)), percent):
-   plt.text(a, 0+1.5, str(round(b,2))+"% returned", horizontalalignment='center', color='white', fontweight='bold')
+for a,b,c  in zip(range(len(percent)), percent, returns): #use percent as the text, and returns as the height
+   plt.text(a, c/2-4+1, str(round(b,2))+"% returned", horizontalalignment='center', color='white', fontweight='bold')
 
 plt.savefig('hayward_george_storeco_data_scientist_candidate.png')
 plt.show()
