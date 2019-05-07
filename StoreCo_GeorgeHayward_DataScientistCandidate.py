@@ -12,7 +12,7 @@
 # Best, 
 # <br>George
 
-# In[1]:
+# In[2]:
 
 
 #importing what I need
@@ -21,7 +21,7 @@ from matplotlib import pyplot as plt
 import sqlite3 as sql
 
 
-# In[2]:
+# In[3]:
 
 
 #connecting
@@ -41,7 +41,7 @@ storeco.to_sql("storeco",conn,if_exists='replace',index=False)
 
 # George JJTA Hayward: First, I am going to get you a table that shows everything we need quickly. Second, I am going to give you a data visualization that summarizes the table. 
 
-# In[3]:
+# In[4]:
 
 
 #I will inject the SQL into Python below:
@@ -58,7 +58,7 @@ ORDER BY 1 ASC;
 """, conn)
 
 
-# In[4]:
+# In[10]:
 
 
 #I will now show viszualize the data. I prefer a stacked bar chart for this:
@@ -96,7 +96,7 @@ for a,b in zip(range(len(total)), total):
    plt.text(a, b+22, str(b)+" total orders", horizontalalignment='center', color='green', fontweight='bold')
 
 for a,b in zip(range(len(percent)), percent):
-   plt.text(a, 0+50, str(round(b,2))+"% returned", horizontalalignment='center', color='black', fontweight='bold')
+   plt.text(a, 0+1.5, str(round(b,2))+"% returned", horizontalalignment='center', color='white', fontweight='bold')
 
 plt.savefig('hayward_george_storeco_data_scientist_candidate.png')
 plt.show()
