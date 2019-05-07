@@ -27,14 +27,14 @@ import sqlite3 as sql
 #connecting
 conn = sql.connect("storeco_georgehayward_data-scientist-candidate.db")
 #reading in takehome data assignment
-casper = pd.read_csv("storeco_data.csv")
+storeco = pd.read_csv("storeco_data.csv")
 #cleaning the data
-casper.columns = casper.columns.str.strip()
+storeco.columns = storeco.columns.str.strip()
 #need to get the strings into dates
-casper['dateordered'] =  pd.to_datetime(casper['dateordered'],format='%m/%d/%y')
-casper['datereturned'] =  pd.to_datetime(casper['datereturned'],format='%m/%d/%y')
+storeco['dateordered'] =  pd.to_datetime(storeco['dateordered'],format='%m/%d/%y')
+storeco['datereturned'] =  pd.to_datetime(storeco['datereturned'],format='%m/%d/%y')
 #prepaing for SQL
-casper.to_sql("storeco",conn,if_exists='replace',index=False)
+storeco.to_sql("storeco",conn,if_exists='replace',index=False)
 
 
 # ### Exercise 1: Crunch the data and tell us whether our return rate is trending up or down. Additional insights are welcome, but not required.
@@ -123,7 +123,7 @@ ORDER BY 1 ASC;
 
 
 # Thanks for reading through everything!
-# Best,
+# <br>Best,
 # <br>George JJTA Hayward
 # <br>Data Scientist Candidate
 # <br>May 6, 2019
